@@ -6,7 +6,7 @@ ENV FILE_DIRECTORY ${FILE_DIRECTORY}
 
 WORKDIR /container1
 
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
