@@ -1,28 +1,53 @@
-options:
-  logging: CLOUD_LOGGING_ONLY
+# options:
+#   logging: CLOUD_LOGGING_ONLY
 
-steps:
-  # Docker Build
+# steps:
+#   # Docker Build
+#   - id: Build
+#     name: "gcr.io/cloud-builders/docker"
+#     entrypoint: "bash"
+#     args:
+#       - "-c"
+#       - |
+#         echo "Step 1: Building Docker image..."
+#         docker build -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:${SHORT_SHA} -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest .
+#         echo "Docker image built successfully."
+#         echo "Step 2: Pushing Docker image..."
+#         docker push us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest
+#         echo "Image pushed successfully."
+
+#   # # Docker Push
+#   # - id: Push
+#   #   name: "gcr.io/cloud-builders/docker"
+#   #   entrypoint: "bash"
+#   #   args:
+#   #     - "-c"
+#   #     - |
+#   #       echo "Step 2: Pushing Docker image..."
+#   #       docker push --all-tags us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s/k8s-con1
+#   #       echo "Image pushed successfully."
+
+
+# Docker Build
   - id: Build
     name: "gcr.io/cloud-builders/docker"
     entrypoint: "bash"
-    args:
-      - "-c"
-      - |
-        echo "Step 1: Building Docker image..."
-        docker build -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:${SHORT_SHA} -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest .
-        echo "Docker image built successfully."
-        echo "Step 2: Pushing Docker image..."
-        docker push us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest
-        echo "Image pushed successfully."
+    args: [
+        "-c",
+        "echo 'Step 2: Building Docker image...'; \
+        us-central1-docker.pkg.dev/${PROJECT_ID}/k8s; \
+        docker build -t us-central1-docker.pkg.dev/${PROJECT_ID}/k8s/k8s-con1:${SHORT_SHA} \
+        -t us-central1-docker.pkg.dev/${PROJECT_ID}/k8s/k8s-con1:latest .; \
+        echo 'Docker image built successfully.'",
+      ]
 
-  # # Docker Push
-  # - id: Push
-  #   name: "gcr.io/cloud-builders/docker"
-  #   entrypoint: "bash"
-  #   args:
-  #     - "-c"
-  #     - |
-  #       echo "Step 2: Pushing Docker image..."
-  #       docker push --all-tags us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s/k8s-con1
-  #       echo "Image pushed successfully."
+  # Docker Push
+  - id: Push
+    name: "gcr.io/cloud-builders/docker"
+    entrypoint: "bash"
+    args: [
+        "-c",
+        "echo 'Step 3: Pushing Docker image...'; \
+        docker push --all-tags us-central1-docker.pkg.dev/${PROJECT_ID}/k8s/k8s-con1; \
+        echo 'Image pushed successfully.'",
+      ]
