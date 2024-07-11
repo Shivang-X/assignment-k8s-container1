@@ -10,7 +10,7 @@ steps:
       - "-c"
       - |
         echo "Step 1: Building Docker image..."
-        docker build -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:${SHORT_SHA} -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest .
+        docker build -t us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest .
         echo "Docker image built successfully."
         echo "Step 2: Pushing Docker image..."
         docker push us-central1-docker.pkg.dev/solar-imprint-427818-r2/k8s-container1:latest
