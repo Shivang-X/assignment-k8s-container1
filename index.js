@@ -13,9 +13,7 @@ const PORT = Number(process.env.PORT) || 6000;
 const CONTAINER_2_ENDPOINT = process.env.CONTAINER_2_ENDPOINT || "http://container2-service:2000/parser";
 const FILE_DIRECTORY = process.env.FILE_DIRECTORY || "../";
 
-console.log("test")
-console.log("test")
-
+console.log("II")
 
 const parseFile = async (file, product) => {
   try {
