@@ -14,7 +14,6 @@ const CONTAINER_2_ENDPOINT = process.env.CONTAINER_2_ENDPOINT || "http://contain
 const FILE_DIRECTORY = process.env.FILE_DIRECTORY || "../";
 
 console.log("IIII")
-console.log("IIII")
 
 const parseFile = async (file, product) => {
   try {
